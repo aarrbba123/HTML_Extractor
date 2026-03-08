@@ -1,0 +1,8 @@
+# Python Virtual Environments
+*py3*
+.venv*
+
+# Backup/Log/Old files
+*.bak
+*.log
+*.old

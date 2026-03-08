@@ -29,8 +29,6 @@ def extract_css_js_from_html(html_content: str, seperate_content: bool = False):
                 js_code += tag.string
             else:
                 js_code.append(tag.string)
-                
-            
 
     # Remove style and script tags from the original HTML
     for tag in style_tags:
@@ -134,9 +132,8 @@ def display_overlay_window():
     overlay.mainloop()  
 
 def main():
-    display_overlay_window()
-
     try:
+        display_overlay_window()
         choice = input("Would you like to select a file using the file explorer? (y/n): ").strip().lower()
 
         if choice == 'y':

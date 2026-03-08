@@ -23,7 +23,7 @@ This Python script extracts inline CSS and JavaScript from an HTML file and save
    pip install tkinter
    ```
 
-*The `tkinter` library is pre-installed in Windows, no need to type in `pip install tkinter`
+*The `tkinter` library is already pre-installed in Windows, Windows users don't need to type in `pip install tkinter`
 
 ### Usage:
 1. Run the script in your terminal or command prompt:

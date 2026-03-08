@@ -70,7 +70,9 @@ def display_overlay_window():
     overlay.configure(bg='white')  
 
     overlay.attributes("-topmost", True)  
-    overlay.attributes("-transparentcolor", 'white')  
+    if "transparentColor" in overlay.wm_attributes(return_python_dict=True).keys():
+        overlay.attributes("-transparentcolor", 'white')  
+        
     overlay.overrideredirect(True)  
 
     label = tk.Label(overlay, text="TheZ on Top", font=('Helvetica', 24), fg='red', bg='white')

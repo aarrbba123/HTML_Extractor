@@ -7,18 +7,23 @@ This Python script extracts inline CSS and JavaScript from an HTML file and save
 - Extracts inline CSS and JavaScript from HTML files.
 - Saves the CSS and JS into separate files.
 - Modifies the original HTML to link to the new CSS and JS files.
-- Displays an overlay with a "TheZ on Top" message before starting the extraction process.
+- Displays a splash screen before starting the extraction process.
+- Prettifies HTML, CSS and JS files before writing. (Optional, enabled through prompt)
 
 ## Requirements:
 - Python 3.x
 - `beautifulsoup4` library (for parsing HTML)
+- `tkinter` library (for showing splash screen, file chooser)
 
 ### Installation:
 1. Make sure Python 3.x is installed on your machine.
 2. Install the required dependencies by running:
    ```bash
    pip install beautifulsoup4
+   pip install tkinter
    ```
+
+*The `tkinter` library is pre-installed in Windows, no need to type in `pip install tkinter`
 
 ### Usage:
 1. Run the script in your terminal or command prompt:
@@ -48,7 +53,7 @@ Replace `YOUR_SERVER_INVITE` with your actual Discord server invite link.
 
 ### Notes:
 - The script works by parsing the HTML file, finding all inline CSS and JavaScript, and saving them in separate files.
-- The `overlay` window with "TheZ on Top" is shown for 2 seconds when the script starts.
+- The splash screen window is shown for 2 seconds when the script starts.
 
 ---
 

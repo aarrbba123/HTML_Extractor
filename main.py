@@ -65,18 +65,28 @@ def open_file_dialog():
 
 def display_overlay_window():
     overlay = tk.Tk()
+    
+    centerWidth = overlay.winfo_screenwidth() // 2
+    centerHeight = overlay.winfo_screenheight() // 2
+    
     overlay.title("Overlay Window")
-    overlay.geometry("300x100+500+250")  
-    overlay.configure(bg='white')  
+    overlay.geometry(f"300x100+{centerWidth}+{centerHeight}")
+    overlay.configure(bg='white')
 
-    overlay.attributes("-topmost", True)  
+    overlay.attributes("-topmost", True)
     if "transparentColor" in overlay.wm_attributes(return_python_dict=True).keys():
         overlay.attributes("-transparentcolor", 'white')  
         
-    overlay.overrideredirect(True)  
+    overlay.overrideredirect(True)
+    
+    mainFrame = tk.Frame(overlay, bg='white')
+    mainFrame.pack(expand=True, anchor='center')
 
-    label = tk.Label(overlay, text="TheZ on Top", font=('Helvetica', 24), fg='red', bg='white')
-    label.pack(expand=True)
+    upstreamLabel = tk.Label(mainFrame, text="TheZ on Top", font=('Helvetica', 24, 'bold'), fg='red', bg='white')
+    upstreamLabel.pack(expand=True, anchor='n')
+    
+    forkLabel = tk.Label(mainFrame, text="modified by aarrbba123", font=('Helvetica', 12, 'italic'), fg='gray', bg='white')
+    forkLabel.pack(expand=True, anchor='se')
 
     overlay.after(2000, overlay.destroy)  
     overlay.mainloop()  
@@ -84,31 +94,35 @@ def display_overlay_window():
 def main():
     display_overlay_window()
 
-    
-    choice = input("Would you like to select a file using the file explorer? (y/n): ").strip().lower()
-
-    if choice == 'y':
-        file_path = open_file_dialog()
-        if not file_path:
-            print("No file selected, exiting...")
-            return
-    else:
-        file_path = input("Enter the full path to the HTML file: ").strip()
-        if not os.path.isfile(file_path):
-            print(f"File '{file_path}' does not exist.")
-            return
-
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            html_content = file.read()
-    except Exception as e:
-        print(f"Error reading file: {e}")
+        choice = input("Would you like to select a file using the file explorer? (y/n): ").strip().lower()
+
+        if choice == 'y':
+            file_path = open_file_dialog()
+            if not file_path:
+                print("No file selected, exiting...")
+                return
+        else:
+            file_path = input("Enter the full path to the HTML file: ").strip()
+            if not os.path.isfile(file_path):
+                print(f"File '{file_path}' does not exist.")
+                return
+
+        try:
+            with open(file_path, 'r', encoding='utf-8') as file:
+                html_content = file.read()
+        except Exception as e:
+            print(f"Error reading file: {e}")
+            return
+
+        new_html, css_code, js_code = extract_css_js_from_html(html_content)
+        save_files(new_html, css_code, js_code)
+
+        print("Process complete: HTML, CSS, and JS have been separated and saved.")
+        
+    except KeyboardInterrupt:
+        print("\nInterrupt recieved, exiting...")
         return
-
-    new_html, css_code, js_code = extract_css_js_from_html(html_content)
-    save_files(new_html, css_code, js_code)
-
-    print("Process complete: HTML, CSS, and JS have been separated and saved.")
 
 if __name__ == "__main__":
     main()

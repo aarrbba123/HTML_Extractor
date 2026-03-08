@@ -108,8 +108,8 @@ def open_file_dialog():
 def display_overlay_window():
     overlay = tk.Tk()
     
-    centerWidth = overlay.winfo_screenwidth() // 2
-    centerHeight = overlay.winfo_screenheight() // 2
+    centerWidth = overlay.winfo_screenwidth() // 2 - 150
+    centerHeight = overlay.winfo_screenheight() // 2 - 50
     
     overlay.title("Overlay Window")
     overlay.geometry(f"300x100+{centerWidth}+{centerHeight}")
